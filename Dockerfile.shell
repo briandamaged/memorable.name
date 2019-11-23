@@ -4,7 +4,7 @@ WORKDIR /usr/src/app
 RUN chown -R node: /usr/src && \
     apt update && \
     apt install -y \
-      vim less && \
+      vim less git && \
     rm -rf /var/lib/apt/lists/*
 
 USER node
