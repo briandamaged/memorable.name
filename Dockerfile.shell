@@ -2,8 +2,8 @@ FROM node:12
 WORKDIR /usr/src/app
 
 RUN chown -R node: /usr/src && \
-    apt update && \
-    apt install -y \
+    apt-get update && \
+    apt-get install -y \
       vim less git && \
     npm install -g \
       lerna pm2@3.5.1 && \
