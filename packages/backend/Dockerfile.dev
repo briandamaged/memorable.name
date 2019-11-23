@@ -1,0 +1,16 @@
+FROM node:12
+WORKDIR /usr/src/app
+
+RUN chown -R node: /usr/src && \
+    apt-get update && \
+    apt-get install -y \
+      vim less && \
+    npm install -g \
+      pm2@3.5.1 && \
+    rm -rf /var/lib/apt/lists/*
+
+USER node
+VOLUME ["/usr/src/app"]
+EXPOSE 3000
+
+CMD npm install && pm2-dev start ./ecosystem.config.js

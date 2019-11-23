@@ -1,9 +1,12 @@
 
-setInterval(function() {
-  console.log("Working!");
-}, 1000);
+import Koa from 'koa';
 
+const app = new Koa();
 
-console.log("Starting...");
+app.use(function(ctx) {
+  ctx.body = "Howdy!";
+});
 
-export const foo = 3;
+app.listen(3000, function() {
+  console.log("Listening...");
+});
