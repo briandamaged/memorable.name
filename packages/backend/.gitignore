@@ -1,0 +1,8 @@
+
+# Node stuffs
+/node_modules
+
+# Build stuffs
+/dist
+
+

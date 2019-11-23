@@ -5,6 +5,8 @@ RUN chown -R node: /usr/src && \
     apt update && \
     apt install -y \
       vim less git && \
+    npm install -g \
+      lerna pm2 && \
     rm -rf /var/lib/apt/lists/*
 
 USER node
