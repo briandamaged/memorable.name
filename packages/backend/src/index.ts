@@ -13,7 +13,7 @@ export interface NameEntry {
   last: string;
 }
 
-const names: NameEntry[] = [
+const namesList: NameEntry[] = [
   {
     first: "Warren",
     last: "Peace",
@@ -32,13 +32,21 @@ const names: NameEntry[] = [
 
 const schema = gql `
   type Query {
-    hello: String
+    names: [NameEntry!]!
+  }
+
+  type NameEntry {
+    first: String!
+    middle: String
+    last: String!
   }
 `;
 
 const resolvers = {
   Query: {
-    hello: ()=> 'Howdy!',
+    names(/* parent, args, context, info */) {
+      return namesList;
+    }
   }
 };
 
