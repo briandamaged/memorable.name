@@ -12,3 +12,15 @@ services:
 
     ports:
       - 5000:3000
+
+  frontend:
+    build:
+      context: ./packages/frontend/
+      dockerfile: Dockerfile.dev
+    volumes:
+      - ./packages/frontend:/usr/src/app
+    environment:
+      NODE_ENV: development
+
+    ports:
+      - 3000:3000
