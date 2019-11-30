@@ -6,7 +6,9 @@ RUN chown -R node: /usr/src && \
     apt-get install -y \
       vim less git && \
     npm install -g \
-      lerna pm2@3.5.1 && \
+      lerna \
+      create-react-app \
+      pm2@3.5.1 && \
     rm -rf /var/lib/apt/lists/*
 
 USER node
