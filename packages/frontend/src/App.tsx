@@ -19,7 +19,7 @@ const query = gql`
 `;
 
 
-const NamesList = ()=> {
+const NamesList: React.FC = ()=> {
   const { data, loading, error } = useQuery(query);
 
   if(loading) {
