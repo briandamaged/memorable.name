@@ -33,8 +33,10 @@
   "dependencies": {
     "apollo-server-koa": "^2.9.12",
     "graphql": "^14.5.8",
+    "knex": "^0.20.3",
     "koa": "^2.11.0",
-    "koa-router": "^7.4.0"
+    "koa-router": "^7.4.0",
+    "pg": "^7.14.0"
   },
   "devDependencies": {
     "@babel/cli": "^7.7.4",

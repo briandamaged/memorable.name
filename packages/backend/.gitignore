@@ -1,4 +1,9 @@
 
+# Config stuffs
+/knexfile.js
+/knexfile.ts
+
+
 # Node stuffs
 /node_modules
 
