@@ -15,15 +15,17 @@ export interface NameEquivalence {
 }
 
 export interface GivenName extends NameEquivalence, IsGendered {
-
+  id: number;
 }
 
 export interface Surname extends NameEquivalence {
-  
+  id: number;
 }
 
 
 export interface FullName extends IsGendered {
+  id: number;
+
   givenNames: GivenName[];
   surnames: Surname[];
 }
