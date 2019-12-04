@@ -78,6 +78,7 @@ export async function up(knex: Knex): Promise<any> {
 
 
 export async function down(knex: Knex): Promise<any> {
+  await knex.schema.dropTable('full_names_surnames');
   await knex.schema.dropTable('full_names_given_names');
   await knex.schema.dropTable('full_names');
 
