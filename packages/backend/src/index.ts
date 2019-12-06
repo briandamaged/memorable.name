@@ -5,7 +5,7 @@ import { ApolloServer, gql } from 'apollo-server-koa';
 
 import Knex from 'knex';
 
-import { GivenName, FullName, Surname } from './models';
+import { GivenName, FullName, Surname } from './types';
 
 const app = new Koa();
 const rtr = new Router();
