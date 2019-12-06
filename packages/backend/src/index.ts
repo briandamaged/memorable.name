@@ -7,10 +7,20 @@ import Knex from 'knex';
 
 import { GivenName, FullName, Surname } from './types';
 
+import { createModels } from './models';
+
 const app = new Koa();
 const rtr = new Router();
 
 const knex = Knex(require('../knexfile'));
+
+
+
+const models = createModels(knex);
+
+models.GivenName.fetchAll({id: [7, 8]}).then(function(givenNames) {
+  console.log(givenNames);
+});
 
 
 async function getGivenNames({id}: {id?: number | number[]} = {}) {
@@ -18,7 +28,7 @@ async function getGivenNames({id}: {id?: number | number[]} = {}) {
   if(typeof(id) === 'number') {
     query = query.where('given_name_id', id);
   } else if(Array.isArray(id)) {
-    query = query.whereIn('given_name_id', id);
+    query = query.where('given_name_id', id);
   }
 
   const gns = await query;
