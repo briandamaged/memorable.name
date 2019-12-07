@@ -39,7 +39,7 @@ export function createModels(knex: Knex) {
 
     // Takes a bunch of `given_names_spellings` rows and reassembles them
     // into a collection of `GivenName` instances.
-    static reassemble(rows: GivenNameSpellingRow[]) {
+    static reassemble(rows: GivenNameSpellingRow[]): GivenNameKnex[] {
       const givenNameGroupings: Record<number, GivenNameKnex> = Object.create(null);
 
       for(const r of rows) {
@@ -53,12 +53,18 @@ export function createModels(knex: Knex) {
         givenName.spellings.push(r.spelling);
       }
 
+      // TODO: Populate gender fields
+
       return Object.values(givenNameGroupings);
     }
 
   }
 
 
+  interface SurnameSpellingRow {
+    surname_id: number;
+    spelling: string;
+  }
 
   class SurnameKnex implements Surname {
     id: number;
@@ -67,6 +73,40 @@ export function createModels(knex: Knex) {
     constructor({id, spellings}: Surname) {
       this.id = id;
       this.spellings = spellings;
+    }
+
+
+    static createSpellingsQuery({id}: {id?: number | number[]} = {}) {
+      const spellingsQuery = knex("surnames_spellings").select();
+      if(typeof(id) === 'number') {
+        spellingsQuery.where('surname_id', id);
+      } else if(Array.isArray(id)) {
+        spellingsQuery.whereIn('surname_id', id);
+      }
+
+      return spellingsQuery;
+    }
+
+    static async fetchAll({id}: {id?: number | number[]} = {}) {
+      const spellingsQuery = this.createSpellingsQuery();
+      const spellingRows = await spellingsQuery;
+      return this.reassemble({spellingRows});
+    }
+
+    static reassemble({spellingRows}: {spellingRows: SurnameSpellingRow[]}): SurnameKnex[] {
+      const surnameGroupings: Record<number, SurnameKnex> = Object.create(null);
+
+      for(const r of spellingRows) {
+        const id = r.surname_id;
+        const surname = surnameGroupings[id] || (surnameGroupings[id] = new SurnameKnex({
+          id: id,
+          spellings: [],
+        }));
+
+        surname.spellings.push(r.spelling);
+      }
+
+      return Object.values(surnameGroupings);
     }
   }
 
