@@ -24,6 +24,7 @@
   },
   "scripts": {
     "build": "npm run clean && babel --extensions '.js,.ts' ./src -d dist",
+    "console": "babel-node --extensions '.js,.ts' ./console.ts",
     "clean": "rm -Rf ./dist",
     "test": "echo \"Error: run tests from root\" && exit 1"
   },
@@ -45,9 +46,10 @@
     "@babel/preset-env": "^7.7.4",
     "@babel/preset-typescript": "^7.7.4",
     "@babel/register": "^7.7.4",
-    "ts-node": "^8.5.4",
     "@types/koa": "^2.0.52",
     "@types/koa-router": "^7.0.42",
+    "@types/node": "^12.12.14",
+    "ts-node": "^8.5.4",
     "typescript": "^3.7.2"
   }
 }
