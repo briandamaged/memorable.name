@@ -8,6 +8,20 @@ export interface GivenNameSpellingRow {
 }
 
 
+
+
+
+function WhereID(query: Knex.QueryBuilder, columnName: string, value?: number | number[]) {
+  if(typeof(value) === 'number') {
+    query.where(columnName, value);
+  } else if(Array.isArray(value)) {
+    query.whereIn(columnName, value);
+  }
+}
+
+
+
+
 export function createModels(knex: Knex) {
 
   class GivenNameKnex implements GivenName {
@@ -23,11 +37,7 @@ export function createModels(knex: Knex) {
 
     static createSpellingsQuery({id}: {id?: number | number[]} = {}) {
       const spellingsQuery = knex("given_names_spellings").select();
-      if(typeof(id) === 'number') {
-        spellingsQuery.where('given_name_id', id);
-      } else if(Array.isArray(id)) {
-        spellingsQuery.whereIn('given_name_id', id);
-      }
+      WhereID(spellingsQuery, 'given_name_id', id);
 
       return spellingsQuery;
     }
@@ -78,11 +88,7 @@ export function createModels(knex: Knex) {
 
     static createSpellingsQuery({id}: {id?: number | number[]} = {}) {
       const spellingsQuery = knex("surnames_spellings").select();
-      if(typeof(id) === 'number') {
-        spellingsQuery.where('surname_id', id);
-      } else if(Array.isArray(id)) {
-        spellingsQuery.whereIn('surname_id', id);
-      }
+      WhereID(spellingsQuery, 'surname_id', id);
 
       return spellingsQuery;
     }
@@ -138,26 +144,25 @@ export function createModels(knex: Knex) {
     }
 
 
+
+
     static createGivenNamesQuery({id}: {id?: number | number[]} = {}) {
       const query = knex('full_names_given_names');
-      if(typeof(id) === 'number') {
-        query.where('full_name_id', id);
-      } else if(Array.isArray(id)) {
-        query.whereIn('full_name_id', id);
-      }
+      WhereID(query, 'full_name_id', id);
 
       return query;
     }
 
     static createSurnamesQuery({id}: {id?: number | number[]} = {}) {
       const query = knex('full_names_surnames');
-      if(typeof(id) === 'number') {
-        query.where('full_name_id', id);
-      } else if(Array.isArray(id)) {
-        query.whereIn('full_name_id', id);
-      }
+      WhereID(query, 'full_name_id', id);
 
       return query;
+    }
+
+
+    static async fetchAll() {
+
     }
 
     static reassemble() {
