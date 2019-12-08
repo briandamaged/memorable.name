@@ -11,11 +11,14 @@ export interface GivenNameSpellingRow {
 
 
 
-function WhereID(query: Knex.QueryBuilder, columnName: string, value?: number | number[]) {
-  if(typeof(value) === 'number') {
-    query.where(columnName, value);
-  } else if(Array.isArray(value)) {
-    query.whereIn(columnName, value);
+function WhereID<T>(query: Knex.QueryBuilder, columnName: string, value?: T | T[]) {
+  const t = typeof(value);
+  if(t !== 'undefined') {
+    if(Array.isArray(value)) {
+      query.whereIn(columnName, value);
+    } else {
+      query.where(columnName, value);
+    }
   }
 }
 
