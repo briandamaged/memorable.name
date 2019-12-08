@@ -1,4 +1,5 @@
 
+import path from 'path';
 import REPL from 'repl';
 
 import Knex from 'knex';
@@ -6,9 +7,11 @@ import config from './knexfile';
 
 import {createModels} from './src/models';
 
-const knex = Knex(config);
 
+const historyPath = path.resolve(__dirname, ".node_repl_history");
+const knex = Knex(config);
 const models = createModels(knex);
+
 
 const repl = REPL.start({
   prompt: "> ",
@@ -16,6 +19,7 @@ const repl = REPL.start({
 
 Object.assign(repl.context, {
   knex, models,
+  repl,
 }, models);
 
 repl.on('exit', async function() {
@@ -24,3 +28,8 @@ repl.on('exit', async function() {
   console.log("--- Done");
 });
 
+
+
+repl.setupHistory(historyPath, function(err) {
+  // TODO: Maybe error handling of some kind?
+});
