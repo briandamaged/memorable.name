@@ -14,13 +14,7 @@ const rtr = new Router();
 
 const knex = Knex(require('../knexfile'));
 
-
-
 const models = createModels(knex);
-
-models.GivenName.fetchAll({id: [7, 8]}).then(function(givenNames) {
-  console.log(givenNames);
-});
 
 
 async function getGivenNames({id}: {id?: number | number[]} = {}) {

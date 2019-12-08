@@ -110,6 +110,9 @@ export function createModels(knex: Knex) {
     }
   }
 
+
+
+
   class FullNameKnex implements FullName {
     id: number;
 
@@ -134,7 +137,36 @@ export function createModels(knex: Knex) {
       return Array.from(genders);
     }
 
+
+    static createGivenNamesQuery({id}: {id?: number | number[]} = {}) {
+      const query = knex('full_names_given_names');
+      if(typeof(id) === 'number') {
+        query.where('full_name_id', id);
+      } else if(Array.isArray(id)) {
+        query.whereIn('full_name_id', id);
+      }
+
+      return query;
+    }
+
+    static createSurnamesQuery({id}: {id?: number | number[]} = {}) {
+      const query = knex('full_names_surnames');
+      if(typeof(id) === 'number') {
+        query.where('full_name_id', id);
+      } else if(Array.isArray(id)) {
+        query.whereIn('full_name_id', id);
+      }
+
+      return query;
+    }
+
+    static reassemble() {
+
+    }
+
   }
+
+
 
   return {
     GivenName: GivenNameKnex,
