@@ -8,6 +8,24 @@ export interface GivenNameSpellingRow {
 }
 
 
+interface SurnameSpellingRow {
+  surname_id: number;
+  spelling: string;
+}
+
+
+interface FullNameGivenNameRow {
+  full_name_id: number;
+  given_name_id: number;
+  ordering: number;
+}
+
+interface FullNameSurnameRow {
+  full_name_id: number;
+  surname_id: number;
+  ordering: number;
+}
+
 
 
 
@@ -21,7 +39,6 @@ function WhereID<T>(query: Knex.QueryBuilder, columnName: string, value?: T | T[
     }
   }
 }
-
 
 
 
@@ -74,10 +91,7 @@ export function createModels(knex: Knex) {
   }
 
 
-  interface SurnameSpellingRow {
-    surname_id: number;
-    spelling: string;
-  }
+
 
   class SurnameKnex implements Surname {
     id: number;
@@ -150,22 +164,45 @@ export function createModels(knex: Knex) {
 
 
     static createGivenNamesQuery({id}: {id?: number | number[]} = {}) {
-      const query = knex('full_names_given_names');
+      const query = knex<FullNameGivenNameRow>('full_names_given_names');
       WhereID(query, 'full_name_id', id);
 
       return query;
     }
 
     static createSurnamesQuery({id}: {id?: number | number[]} = {}) {
-      const query = knex('full_names_surnames');
+      const query = knex<FullNameSurnameRow>('full_names_surnames');
       WhereID(query, 'full_name_id', id);
 
       return query;
     }
 
 
-    static async fetchAll() {
+    static async fetchAll({id}: {id?: number | number[]} = {}) {
+      const givenNamesQuery = this.createGivenNamesQuery({id});
+      const surnamesQuery = this.createSurnamesQuery({id});
 
+      const [
+        givenNameRows, surnameRows,
+      ] = await Promise.all([givenNamesQuery, surnamesQuery]);
+
+      const [
+        givenNames, surnames,
+      ] = await Promise.all([
+        GivenNameKnex.fetchAll({
+          id: givenNameRows.map((gnr)=> gnr.given_name_id)
+        }),
+        SurnameKnex.fetchAll({
+          id: surnameRows.map((sr)=> sr.surname_id),
+        }),
+      ]);
+
+
+
+
+      return {
+        givenNames, surnames,
+      };
     }
 
     static reassemble() {
