@@ -37,6 +37,7 @@
     "knex": "^0.20.3",
     "koa": "^2.11.0",
     "koa-router": "^7.4.0",
+    "lodash": "^4.17.15",
     "pg": "^7.14.0"
   },
   "devDependencies": {
@@ -48,6 +49,7 @@
     "@babel/register": "^7.7.4",
     "@types/koa": "^2.0.52",
     "@types/koa-router": "^7.0.42",
+    "@types/lodash": "^4.14.149",
     "@types/node": "^12.12.14",
     "ts-node": "^8.5.4",
     "typescript": "^3.7.2"

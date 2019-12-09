@@ -1,5 +1,7 @@
 import Knex from "knex";
 
+import _ from 'lodash';
+
 import { GivenName, Surname, FullName } from '../types';
 
 export interface GivenNameSpellingRow {
@@ -39,6 +41,7 @@ function WhereID<T>(query: Knex.QueryBuilder, columnName: string, value?: T | T[
     }
   }
 }
+
 
 
 
@@ -198,11 +201,34 @@ export function createModels(knex: Knex) {
       ]);
 
 
+      const givenNameLookup = _.groupBy(givenNames, (gn)=> gn.id);
+      const surnameLookup = _.groupBy(surnames, (s)=> s.id);
 
+      const fullnameLookup: Record<number, FullNameKnex> = {};
 
-      return {
-        givenNames, surnames,
-      };
+      for(const row of givenNameRows) {
+        const fullName = fullnameLookup[row.full_name_id] || (fullnameLookup[row.full_name_id] = new FullNameKnex({
+          id: row.full_name_id,
+          givenNames: [],
+          surnames: [],
+          genders: [], // FIXME
+        }));
+
+        fullName.givenNames.push(givenNameLookup[row.given_name_id][0]);
+      }
+
+      for(const row of surnameRows) {
+        const fullName = fullnameLookup[row.full_name_id] || (fullnameLookup[row.full_name_id] = new FullNameKnex({
+          id: row.full_name_id,
+          givenNames: [],
+          surnames: [],
+          genders: [], // FIXME
+        }));
+
+        fullName.surnames.push(surnameLookup[row.surname_id][0]);
+      }
+
+      return Object.values(fullnameLookup);
     }
 
     static reassemble() {
