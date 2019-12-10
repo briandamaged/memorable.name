@@ -11,9 +11,14 @@ const client = new ApolloClient({
 
 const query = gql`
   {
-    names {
-      first
-      last
+    fullNames {
+      givenNames {
+        spellings
+      }
+
+      surnames {
+        spellings
+      }
     }
   }
 `;
@@ -33,8 +38,8 @@ const NamesList: React.FC = ()=> {
   return (
     <ul>
       {
-        data.names.map(({first, last}: {first: string, last: string}) => (
-          <li>{first} {last}</li>
+        data.fullNames.map(({givenNames, surnames}: {givenNames: {spellings: string[]}[], surnames: {spellings: string[]}[] }) => (
+          <li>{givenNames[0].spellings[0]} {surnames[0].spellings[0]}</li>
         ))
       }
     </ul>
