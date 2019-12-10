@@ -40,19 +40,27 @@ const schema = gql `
 
 const resolvers = {
   Query: {
-    async fullNames(/* parent, args, context, info */) {
-      return models.FullName.fetchAll();
+    async fullNames(parent: unknown, args: unknown, context: GQLContext) {
+      return context.models.FullName.fetchAll();
     },
 
-    async givenNames() {
-      return models.GivenName.fetchAll();
+    async givenNames(parent: unknown, args: unknown, context: GQLContext) {
+      return context.models.GivenName.fetchAll();
     },
   },
 };
 
+
+interface GQLContext {
+  models: typeof models;
+}
+
 const gqlServer = new ApolloServer({
   typeDefs: schema,
   resolvers: resolvers,
+  context: {
+    models,
+  },
 });
 
 
