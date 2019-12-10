@@ -24,6 +24,7 @@
   },
   "scripts": {
     "build": "npm run clean && babel --extensions '.js,.ts' ./src -d dist",
+    "check-types": "tsc",
     "console": "babel-node --extensions '.js,.ts' ./console.ts",
     "clean": "rm -Rf ./dist",
     "test": "echo \"Error: run tests from root\" && exit 1"
@@ -51,6 +52,7 @@
     "@types/koa-router": "^7.0.42",
     "@types/lodash": "^4.14.149",
     "@types/node": "^12.12.14",
+    "@types/node-fetch": "^2.5.4",
     "ts-node": "^8.5.4",
     "typescript": "^3.7.2"
   }
