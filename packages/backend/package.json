@@ -33,6 +33,7 @@
     "url": "https://github.com/briandamaged/memorable.name/issues"
   },
   "dependencies": {
+    "@memorable.name/types": "^0.0.0",
     "apollo-server-koa": "^2.9.12",
     "graphql": "^14.5.8",
     "knex": "^0.20.3",
