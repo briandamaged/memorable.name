@@ -4,7 +4,9 @@ WORKDIR /usr/src/app
 RUN chown -R node: /usr/src && \
     apt-get update && \
     apt-get install -y \
-      vim less && \
+      vim \
+      less \
+      postgresql-client && \
     npm install -g \
       pm2@3.5.1 && \
     rm -rf /var/lib/apt/lists/*

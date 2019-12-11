@@ -1,4 +1,12 @@
 
+# App stuffs
+/.node_repl_history
+
+# Config stuffs
+/knexfile.js
+/knexfile.ts
+
+
 # Node stuffs
 /node_modules
 
