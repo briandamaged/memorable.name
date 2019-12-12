@@ -19,6 +19,8 @@ services:
       - 5000:5000
       - 3000:3000
 
+    command: "pm2-dev start ./ecosystem.config.js"
+
   database:
     image: "postgres:11"
     volumes:

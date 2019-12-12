@@ -15,4 +15,4 @@ USER node
 VOLUME ["/usr/src/app"]
 EXPOSE 3000
 
-CMD lerna bootstrap && cd ./packages/backend && pm2-dev start ./ecosystem.config.js
+CMD lerna bootstrap --hoist && pm2-dev start ./ecosystem.config.js
