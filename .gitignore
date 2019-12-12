@@ -1,3 +1,6 @@
 
 # Lerna stuffs
 /lerna-debug.log
+
+# Node stuffs
+node_modules

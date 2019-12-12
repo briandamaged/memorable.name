@@ -27,6 +27,7 @@
     "check-types": "tsc",
     "console": "babel-node --extensions '.js,.ts' ./console.ts",
     "clean": "rm -Rf ./dist",
+    "start": "node dist",
     "test": "echo \"Error: run tests from root\" && exit 1"
   },
   "bugs": {
