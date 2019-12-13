@@ -2,7 +2,7 @@ import Knex from "knex";
 
 import _ from 'lodash';
 
-import { GivenName, Surname, FullName } from '../types';
+import { GivenName, Surname, FullName } from '@memorable.name/types';
 
 export interface GivenNameSpellingRow {
   given_name_id: number;
