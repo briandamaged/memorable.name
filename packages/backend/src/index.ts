@@ -5,7 +5,7 @@ import { ApolloServer, gql } from 'apollo-server-koa';
 
 import Knex from 'knex';
 
-import { GivenName, FullName, Surname } from './types';
+import { GivenName, FullName, Surname } from '@memorable.name/types';
 
 import { createModels } from './models';
 
