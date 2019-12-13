@@ -10,9 +10,9 @@
   "homepage": "https://github.com/briandamaged/memorable.name",
   "license": "UNLICENSED",
   "main": "lib/types.js",
+  "typings": "./lib/index.d.ts",
   "directories": {
-    "lib": "lib",
-    "test": "__tests__"
+    "lib": "lib"
   },
   "files": [
     "lib"
@@ -25,9 +25,19 @@
     "url": "git+https://github.com/briandamaged/memorable.name.git"
   },
   "scripts": {
+    "build": "npm run check-types && babel --extensions '.js,.ts' ./src -d lib",
+    "check-types": "tsc",
     "test": "echo \"Error: run tests from root\" && exit 1"
   },
   "bugs": {
     "url": "https://github.com/briandamaged/memorable.name/issues"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.7.5",
+    "@babel/core": "^7.7.5",
+    "@babel/preset-env": "^7.7.6",
+    "@babel/preset-typescript": "^7.7.4",
+    "@babel/register": "^7.7.4",
+    "typescript": "^3.7.3"
   }
 }
