@@ -27,7 +27,9 @@
   "scripts": {
     "build": "npm run check-types && babel --extensions '.js,.ts' ./src -d lib",
     "check-types": "tsc",
-    "test": "echo \"Error: run tests from root\" && exit 1"
+    "clean": "rm -Rf ./lib",
+    "test": "echo \"Error: run tests from root\" && exit 1",
+    "watch": "echo 'TODO: Add babel support'; npm run check-types -- -w"
   },
   "bugs": {
     "url": "https://github.com/briandamaged/memorable.name/issues"
