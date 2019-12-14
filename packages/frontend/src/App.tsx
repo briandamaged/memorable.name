@@ -4,6 +4,8 @@ import './App.css';
 import ApolloClient, { gql } from 'apollo-boost';
 import { ApolloProvider, useQuery } from '@apollo/react-hooks';
 
+import { FullName } from '@memorable.name/types';
+
 
 const client = new ApolloClient({
   uri: "http://localhost:5000/graphql",
@@ -23,14 +25,18 @@ const query = gql`
   }
 `;
 
+interface FullNameResults {
+  fullNames: FullName[];
+}
+
 
 const NamesList: React.FC = ()=> {
-  const { data, loading, error } = useQuery(query);
+  const { data, loading, error } = useQuery<FullNameResults>(query);
 
   if(loading) {
     return <div>Loading...</div>;
-  };
-
+  }
+  
   if(error) {
     return <div>Error!</div>;
   }
@@ -38,12 +44,13 @@ const NamesList: React.FC = ()=> {
   return (
     <ul>
       {
-        data.fullNames.map(({givenNames, surnames}: {givenNames: {spellings: string[]}[], surnames: {spellings: string[]}[] }) => (
+        data!.fullNames.map(({givenNames, surnames}) => (
           <li>{givenNames[0].spellings[0]} {surnames[0].spellings[0]}</li>
         ))
       }
     </ul>
   );
+
 }
 
 const App: React.FC = () => {
