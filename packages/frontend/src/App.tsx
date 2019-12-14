@@ -1,6 +1,14 @@
 import React from 'react';
 import './App.css';
 
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link
+} from "react-router-dom";
+
+
 import ApolloClient, { gql } from 'apollo-boost';
 import { ApolloProvider, useQuery } from '@apollo/react-hooks';
 
@@ -56,7 +64,16 @@ const NamesList: React.FC = ()=> {
 const App: React.FC = () => {
   return (
     <ApolloProvider client={client} >
-      <NamesList />
+      <Router>
+        <Switch>
+          <Route path="/foo" >
+            FOO!
+          </Route>
+          <Route path="/" >
+            <NamesList />
+          </Route>
+        </Switch>
+      </Router>
     </ApolloProvider>
   );
 }
