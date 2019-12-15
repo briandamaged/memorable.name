@@ -8,7 +8,8 @@ RUN chown -R node: /usr/src && \
     npm install -g \
       lerna \
       create-react-app \
-      pm2@3.5.1 && \
+      pm2@3.5.1 \
+      @storybook/cli && \
     rm -rf /var/lib/apt/lists/*
 
 USER node
