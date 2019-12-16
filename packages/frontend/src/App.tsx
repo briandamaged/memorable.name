@@ -1,5 +1,6 @@
 import React from 'react';
-import './App.css';
+
+import { Grommet } from 'grommet';
 
 import {
   BrowserRouter as Router,
@@ -13,6 +14,17 @@ import ApolloClient, { gql } from 'apollo-boost';
 import { ApolloProvider, useQuery } from '@apollo/react-hooks';
 
 import { FullName } from '@memorable.name/types';
+
+
+const theme = {
+  global: {
+    font: {
+      family: 'Roboto',
+      size: '18px',
+      height: '20px',
+    },
+  },
+};
 
 
 const client = new ApolloClient({
@@ -64,16 +76,18 @@ const NamesList: React.FC = ()=> {
 const App: React.FC = () => {
   return (
     <ApolloProvider client={client} >
-      <Router>
-        <Switch>
-          <Route path="/foo" >
-            FOO!
-          </Route>
-          <Route path="/" >
-            <NamesList />
-          </Route>
-        </Switch>
-      </Router>
+      <Grommet theme={theme}>
+        <Router>
+          <Switch>
+            <Route path="/foo" >
+              FOO!
+            </Route>
+            <Route path="/" >
+              <NamesList />
+            </Route>
+          </Switch>
+        </Router>
+      </Grommet>
     </ApolloProvider>
   );
 }
