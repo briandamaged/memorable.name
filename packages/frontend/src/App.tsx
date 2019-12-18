@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 
 import {
-  Grommet,
   Box,
   Button, 
   Heading, 
@@ -27,18 +26,7 @@ import ApolloClient, { gql } from 'apollo-boost';
 import { ApolloProvider, useQuery } from '@apollo/react-hooks';
 
 import { FullName } from '@memorable.name/types';
-
-
-const theme = {
-  global: {
-    font: {
-      family: 'Roboto',
-      size: '18px',
-      height: '20px',
-    },
-  },
-};
-
+import Grommet from './containers/Grommet';
 
 const client = new ApolloClient({
   uri: "http://localhost:5000/graphql",
@@ -111,7 +99,7 @@ const App: React.FC = () => {
 
   return (
     <ApolloProvider client={client} >
-      <Grommet theme={theme} full>
+      <Grommet>
         <ResponsiveContext.Consumer >
           {(size)=> (
 
