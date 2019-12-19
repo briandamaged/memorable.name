@@ -23,10 +23,10 @@ export const HomophoneForm: React.FC = (props)=> {
       }
   );
 
-  const RemoveSpellingHandler = (
+  const SpellingBlurHandler = (
     (index: number)=>
-      function handleRemoveSpelling() {
-        if(index < spellings.length) {
+      function handleSpellingBlur() {
+        if(index < spellings.length - 1 && spellings[index] === '') {
           const newSpellings = spellings.slice(0);
           newSpellings.splice(index, 1);
           setSpellings(newSpellings);
@@ -55,9 +55,9 @@ export const HomophoneForm: React.FC = (props)=> {
                 name={`spelling[${index}]`}
                 value={sp}
                 onChange={SpellingChangeHandler(index)}
+                onBlur={SpellingBlurHandler(index)}
               />
 
-              <button type="button" onClick={RemoveSpellingHandler(index)} >Remove</button>
             </Box>
           ))
         }
