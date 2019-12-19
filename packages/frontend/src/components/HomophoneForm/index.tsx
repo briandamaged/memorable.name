@@ -14,14 +14,14 @@ export const HomophoneForm: React.FC = (props)=> {
         if(index < spellings.length) {
           const newSpellings = spellings.slice(0);
           newSpellings[index] = e.target.value;
+
+          if(index === newSpellings.length - 1) {
+            newSpellings.push("");
+          }
           setSpellings(newSpellings);
         }
       }
   );
-
-  function handleAddSpelling() {
-    setSpellings(spellings.concat(""));
-  }
 
   const RemoveSpellingHandler = (
     (index: number)=>
@@ -61,8 +61,6 @@ export const HomophoneForm: React.FC = (props)=> {
             </Box>
           ))
         }
-
-        <button type="button" onClick={handleAddSpelling} >Add Spelling</button>
 
         <input type="submit" value="Submit" />
       </Box>
