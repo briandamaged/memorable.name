@@ -5,16 +5,11 @@ import {
   Grommet as BaseGrommet,
 } from 'grommet';
 
-export const theme = {
-  global: {
-    font: {
-      family: 'Roboto',
-      size: '18px',
-      height: '20px',
-    },
-  },
-};
+import {
+  grommet, base
+} from 'grommet/themes';
 
+export const theme = base;
 
 export const Grommet: React.FC = (props)=> (
   <BaseGrommet theme={theme} full {...props} />

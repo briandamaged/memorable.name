@@ -1,9 +1,9 @@
 
 import React from 'react';
 
-import { action } from '@storybook/addon-actions';
-
 import { FullName, GivenName, Surname } from '@memorable.name/types';
+
+import Grommet from '../src/containers/Grommet';
 
 import FullNameList from '../src/components/FullNameList';
 
@@ -25,10 +25,25 @@ const someNames: FullName[] = [
     }],
     genders: [],
   },
+  {
+    id: 2,
+    givenNames: [{
+      id: 1,
+      spellings: ["John", "Jon"],
+      genders: ['m'],
+    }],
+    surnames: [{
+      id: 1,
+      spellings: ["St. Brian", "St. Bryan"]
+    }],
+    genders: [],
+  },
 ]
 
 export const quickExample = ()=> (
-  <FullNameList fullNames={someNames} />
+  <Grommet>
+    <FullNameList fullNames={someNames} />
+  </Grommet>
 )
 
 quickExample.story = {

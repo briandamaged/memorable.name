@@ -22,15 +22,13 @@ import {
 } from "react-router-dom";
 
 
-import ApolloClient, { gql } from 'apollo-boost';
-import { ApolloProvider, useQuery } from '@apollo/react-hooks';
+import { gql } from 'apollo-boost';
+import { useQuery } from '@apollo/react-hooks';
 
 import { FullName } from '@memorable.name/types';
-import Grommet from './containers/Grommet';
 
-const client = new ApolloClient({
-  uri: "http://localhost:5000/graphql",
-});
+import Grommet from './containers/Grommet';
+import ApolloProvider from './containers/Apollo';
 
 const query = gql`
   {
@@ -98,7 +96,7 @@ const App: React.FC = () => {
   const [expanded, setExpanded] = useState(false);
 
   return (
-    <ApolloProvider client={client} >
+    <ApolloProvider >
       <Grommet>
         <ResponsiveContext.Consumer >
           {(size)=> (
