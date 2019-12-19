@@ -3,7 +3,7 @@ import React from 'react';
 
 import {Box} from 'grommet';
 
-import Grommet, {theme} from '../src/containers/Grommet';
+import Grommet from '../src/containers/Grommet';
 
 import FullNameForm from '../src/components/FullNameForm';
 
@@ -17,7 +17,6 @@ export const basic = ()=> (
     <Box align="center" pad="large" >
       <FullNameForm />
     </Box>
-    <code><pre>{JSON.stringify(theme, null, 2)}</pre></code>
   </Grommet>
 );
 
