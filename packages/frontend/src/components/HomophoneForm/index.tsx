@@ -37,7 +37,7 @@ export const HomophoneForm: React.FC = (props)=> {
 
   function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    console.log(JSON.stringify(spellings, null, 2));
+    console.log(JSON.stringify(spellings.slice(0, spellings.length - 1), null, 2));
   }
 
   return (
@@ -49,16 +49,13 @@ export const HomophoneForm: React.FC = (props)=> {
 
         {
           spellings.map((sp, index)=> (
-            <Box direction="row" >
-              <input
-                type="text"
-                name={`spelling[${index}]`}
-                value={sp}
-                onChange={SpellingChangeHandler(index)}
-                onBlur={SpellingBlurHandler(index)}
-              />
-
-            </Box>
+            <input
+              type="text"
+              name={`spelling[${index}]`}
+              value={sp}
+              onChange={SpellingChangeHandler(index)}
+              onBlur={SpellingBlurHandler(index)}
+            />
           ))
         }
 
