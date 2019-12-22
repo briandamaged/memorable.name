@@ -4,7 +4,10 @@ WORKDIR /usr/src/app
 RUN chown -R node: /usr/src && \
     apt-get update && \
     apt-get install -y \
-      vim less git && \
+      vim \
+      less \
+      git \
+      postgresql-client && \
     npm install -g \
       lerna \
       create-react-app \
