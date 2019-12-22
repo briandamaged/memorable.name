@@ -58,6 +58,29 @@ export function createModels(knex: Knex) {
       this.genders = genders;
     }
 
+    static async create({spellings}: {spellings: string[]}) {
+      return knex.transaction(async function(trx) {
+        const [id] = await trx("given_names").insert({}, 'id');
+
+        const uniqueSpellings = Array
+          .from(new Set(spellings))
+          .filter((s)=> s);
+
+        const spellingsRows = uniqueSpellings
+          .map((s)=> ({
+            spelling: s,
+            given_name_id: id,
+          }));
+
+        await trx("given_names_spellings").insert(spellingsRows);
+
+        return {
+          id: id,
+          spellings: uniqueSpellings,
+        }
+      });
+    }
+
     static createSpellingsQuery({id}: {id?: number | number[]} = {}) {
       const spellingsQuery = knex("given_names_spellings").select();
       WhereID(spellingsQuery, 'given_name_id', id);
