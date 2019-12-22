@@ -15,7 +15,7 @@ module.exports = {
       // Options reference: https://pm2.io/doc/en/runtime/reference/ecosystem-file/
       instances: 1,
       autorestart: true,
-      watch: false,
+      watch: true,
       max_memory_restart: '1G',
     },
     {
@@ -23,6 +23,18 @@ module.exports = {
       cwd: './packages/frontend',
       script: 'npm',
       args: ['run', '--', 'start'],
+
+      // Options reference: https://pm2.io/doc/en/runtime/reference/ecosystem-file/
+      instances: 1,
+      autorestart: true,
+      watch: false,
+      max_memory_restart: '1G',
+    },
+    {
+      name: 'storybook',
+      cwd: './packages/frontend',
+      script: 'npm',
+      args: ['run', '--', 'storybook'],
 
       // Options reference: https://pm2.io/doc/en/runtime/reference/ecosystem-file/
       instances: 1,
