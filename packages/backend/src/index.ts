@@ -23,6 +23,10 @@ const schema = gql `
     givenNames: [GivenName!]!
   }
 
+  type Mutation {
+    createGivenName(spellings: [String!]! ): GivenName!
+  }
+
   type FullName {
     givenNames: [GivenName!]!
     surnames: [Surname!]!
@@ -47,6 +51,16 @@ const resolvers = {
     async givenNames(parent: unknown, args: unknown, context: GQLContext) {
       return context.models.GivenName.fetchAll();
     },
+  },
+
+  Mutation: {
+    async createGivenName(parent: unknown, args: {spellings: string[]}, {models}: GQLContext) {
+      const givenName = models.GivenName.create({
+        spellings: args.spellings,
+      });
+
+      return givenName;
+    }
   },
 };
 
