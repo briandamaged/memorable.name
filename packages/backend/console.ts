@@ -3,13 +3,12 @@ import path from 'path';
 import REPL from 'repl';
 
 import Knex from 'knex';
-import config from './knexfile';
 
 import {createModels} from './src/models';
 
 
 const historyPath = path.resolve(__dirname, ".node_repl_history");
-const knex = Knex(config);
+const knex = Knex(require('./knexfile'));
 const models = createModels(knex);
 
 
