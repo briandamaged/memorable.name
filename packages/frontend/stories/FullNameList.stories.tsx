@@ -1,7 +1,10 @@
 
 import React from 'react';
 
-import { FullName, GivenName, Surname } from '@memorable.name/types';
+import {
+  FullName, GivenName, Surname,
+  FullNameRendition, GivenNameRendition, SurnameRendition,
+} from '@memorable.name/types';
 
 import Grommet from '../src/containers/Grommet';
 
@@ -11,38 +14,26 @@ export default {
   title: 'FullNameList',
 };
 
-const someNames: FullName[] = [
-  {
-    id: 1,
-    givenNames: [{
-      id: 1,
-      spellings: ["Brian", "Bryan"],
-      genders: ['m'],
-    }],
-    surnames: [{
-      id: 1,
-      spellings: ["St. John", "St. Jon"]
-    }],
-    genders: [],
-  },
-  {
-    id: 2,
-    givenNames: [{
-      id: 1,
-      spellings: ["John", "Jon"],
-      genders: ['m'],
-    }],
-    surnames: [{
-      id: 1,
-      spellings: ["St. Brian", "St. Bryan"]
-    }],
-    genders: [],
-  },
-]
+
+const someNames: FullNameRendition[] = [
+  new FullNameRendition({
+    givenNameRenditions: [
+      new GivenNameRendition({
+        spelling: "Warren",
+        gender: "m",
+      }),
+    ],
+    surnameRenditions: [
+      new SurnameRendition({
+        spelling: "Peace",
+      })
+    ],
+  }),
+];
 
 export const quickExample = ()=> (
   <Grommet>
-    <FullNameList fullNames={someNames} />
+    <FullNameList fullNameRenditions={someNames} />
   </Grommet>
 )
 
