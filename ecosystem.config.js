@@ -46,7 +46,22 @@ module.exports = {
       name: 'types',
       cwd: './packages/types',
       script: 'npm',
-      args: ['run', '--', 'watch'],
+      args: ['run', '--', 'watch:typescript'],
+
+      instances: 1,
+      autorestart: true,
+      watch: false,
+      max_memory_restart: '1G',
+      ignore_watch: [
+        "node_modules",
+        "lib",
+      ]
+    },
+    {
+      name: 'types',
+      cwd: './packages/types',
+      script: 'npm',
+      args: ['run', '--', 'watch:babel'],
 
       instances: 1,
       autorestart: true,

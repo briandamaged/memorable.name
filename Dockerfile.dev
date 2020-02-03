@@ -19,4 +19,4 @@ USER node
 VOLUME ["/usr/src/app"]
 EXPOSE 3000
 
-CMD lerna bootstrap --hoist && (pm2 --no-daemon start ./ecosystem.config.js || pm2 kill)
+CMD lerna bootstrap && (pm2 --no-daemon start ./ecosystem.config.js || pm2 kill)
