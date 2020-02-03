@@ -33,20 +33,10 @@ export interface User {
 }
 
 
-//// TODO: Figure out how tagging will work
-
-// export interface Taggable {
-//   taggings: Tagging
-// }
-
-// export interface Tagging {
-//   tag: Tag;
-//   appliedTo: Taggable;
-//   taggedBy: User;
-// }
-
-
-
+export interface JokeRendition {
+  name: string;
+  soundsLike: string;
+}
 
 
 
@@ -89,5 +79,9 @@ export class FullNameRendition {
     return comps.join(' ');
   }
 }
+
+
+
+
 
 
