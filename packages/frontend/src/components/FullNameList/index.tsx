@@ -1,31 +1,49 @@
 
-import React from 'react';
-
-import { List, Box } from 'grommet';
+import React, {useContext} from 'react';
 
 import {
-  FullName,
-  FullNameRendition,
+  Box,
+  Grid,
+  ResponsiveContext,
+} from 'grommet';
+
+import {
+  Joke,
 } from '@memorable.name/types';
 
+import JokeRevealer from './JokeRevealer';
 
 
-export const FullNameEntry: React.FC<{fullNameRendition: FullNameRendition}> = ({fullNameRendition})=> (
-  <Box>
-    {fullNameRendition.render()}
-  </Box>
-)
+function columnsFor(size: string): string[] {
+  switch(size) {
+    case "medium":
+      return ["medium", "medium"];
+    default:
+      return ["medium"];
+  }
+}
+
+export const FullNameList2: React.FC<{jokes: Joke[]}> = ({jokes})=> {
+  const size = useContext(ResponsiveContext);
 
 
 
-export const FullNameList: React.FC<{fullNameRenditions: FullNameRendition[]}> = ({fullNameRenditions})=> (
-  <Box direction="column" >
-    { 
-      fullNameRenditions.map((fnr, index)=> (
-        <FullNameEntry key={index} fullNameRendition={fnr} />
-      ))
-    }
-  </Box>
-);
+  return (
+    <Grid
+      columns={columnsFor(size)}
+      gap="small"
+    >
+      { 
+        jokes.map((joke, index)=> (
+          <JokeRevealer key={index} {...joke} />
+        ))
+      }
 
-export default FullNameList;
+      {size}
+    </Grid>
+  );
+
+};
+
+
+export default FullNameList2;

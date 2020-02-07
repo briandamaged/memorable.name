@@ -33,8 +33,11 @@ export interface User {
 }
 
 
-export interface JokeRendition {
-  name: string;
+
+export interface Joke {
+  fullName: string;
+
+  hints: string[];
   soundsLike: string;
 }
 
@@ -79,9 +82,3 @@ export class FullNameRendition {
     return comps.join(' ');
   }
 }
-
-
-
-
-
-

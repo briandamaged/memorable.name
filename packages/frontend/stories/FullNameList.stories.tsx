@@ -2,8 +2,11 @@
 import React from 'react';
 
 import {
-  FullName, GivenName, Surname,
-  FullNameRendition, GivenNameRendition, SurnameRendition,
+  Box,
+} from 'grommet';
+
+import {
+  Joke,
 } from '@memorable.name/types';
 
 import Grommet from '../src/containers/Grommet';
@@ -15,25 +18,49 @@ export default {
 };
 
 
-const someNames: FullNameRendition[] = [
-  new FullNameRendition({
-    givenNameRenditions: [
-      new GivenNameRendition({
-        spelling: "Warren",
-        gender: "m",
-      }),
+
+const jokes: Joke[] = [
+  {
+    fullName: "Warren Peace",
+    hints: [
+      "Book title",
     ],
-    surnameRenditions: [
-      new SurnameRendition({
-        spelling: "Peace",
-      })
+    soundsLike: "War and Peace",
+  },
+  {
+    fullName: "Omar Gourd",
+    hints: [
+      "God",
     ],
-  }),
+    soundsLike: "Oh my God",
+  },
+  {
+    fullName: "Window Payne",
+    hints: [],
+    soundsLike: "Window Pane",
+  },
+  {
+    fullName: "Bjorne Tufail",
+    hints: [
+      "Born",
+    ],
+    soundsLike: "Born to Fail",
+  },
+  {
+    fullName: "Anna Mills",
+    hints: [],
+    soundsLike: "Animals",
+  }
 ];
+
+
+
 
 export const quickExample = ()=> (
   <Grommet>
-    <FullNameList fullNameRenditions={someNames} />
+    <Box fill align="center" justify="center" >
+      <FullNameList jokes={jokes} />
+    </Box>
   </Grommet>
 )
 

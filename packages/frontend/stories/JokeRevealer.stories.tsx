@@ -4,7 +4,7 @@ import React from 'react';
 import { Box } from 'grommet';
 
 import {
-  JokeRendition,
+  Joke,
 } from '@memorable.name/types';
 
 import Grommet from '../src/containers/Grommet';
@@ -15,11 +15,21 @@ export default {
   title: 'JokeRevealer',
 };
 
+
+const joke: Joke = {
+  fullName: "Warren Peace",
+  hints: [
+    "Book Title",
+  ],
+  soundsLike: "War and Peace",
+};
+
+
 export const quickExample = ()=> (
   <Grommet>
     <Box fill align="center" justify="center" >
       <Box width="medium" >
-        <JokeRevealer name="Warren Peace" soundsLike="War and Peace" />
+        <JokeRevealer {...joke} />
       </Box>
     </Box>
   </Grommet>

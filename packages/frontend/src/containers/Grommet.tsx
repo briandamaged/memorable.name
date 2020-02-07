@@ -6,10 +6,11 @@ import {
 } from 'grommet';
 
 import {
-  grommet, base
+  grommet,
+  base,
 } from 'grommet/themes';
 
-export const theme = base;
+export const theme = grommet;
 
 export const Grommet: React.FC = (props)=> (
   <BaseGrommet theme={theme} full {...props} />
